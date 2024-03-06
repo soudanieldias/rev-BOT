@@ -1,8 +1,23 @@
-import { Client } from 'discord.js';
+import { Client, Collection, SlashCommandBuilder, } from 'discord.js';
+import Modules from './modules/index';
+import ICommand from './modules/interfaces/ICommand';
+import config from './config.json';
+const {
+  LoadCommands,
+} = Modules;
 
 export default class App {
-  public client = new Client({ partials: [], intents: []  });
-  constructor() {}
+  public client: Client = new Client({ partials: [], intents: []  });
 
-  public start() {}
+  private TOKEN = config.TOKEN;
+
+  public Commands = new Collection<String, ICommand>();
+
+  constructor() {
+    this.client.login(this.TOKEN);
+  }
+  
+  public start() {
+    // LoadCommands(this.client, this.Commands);
+  }
 }
